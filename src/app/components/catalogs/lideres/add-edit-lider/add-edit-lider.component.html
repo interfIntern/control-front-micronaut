@@ -1,0 +1,72 @@
+<h3 mat-dialog-title> {{ data.idLider !== undefined ? 'Editar' : 'Agregar' }} elemento</h3>
+<form (ngSubmit)="submit" #formControl="ngForm">
+  <mat-dialog-content>
+    <div fxLayout="column">
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Primer nombre</mat-label>
+        <input matInput placeholder="Primer nombre" [(ngModel)]="data.primerNombre" name="primer_nombre" maxlength="100"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Segundo nombre</mat-label>
+        <input matInput placeholder="Primer nombre" [(ngModel)]="data.segundoNombre" name="segundo_nombre"
+          maxlength="100">
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Apellido paterno</mat-label>
+        <input matInput placeholder="Apellido paterno" [(ngModel)]="data.paterno" name="paterno" maxlength="100"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Apellido materno</mat-label>
+        <input matInput placeholder="Apellido materno" [(ngModel)]="data.materno" name="materno" maxlength="100"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Mail</mat-label>
+        <input matInput placeholder="Mail" [(ngModel)]="data.mail" name="mail" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput placeholder="Telefono" [(ngModel)]="data.telefono" name="telefono" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Extension</mat-label>
+        <input matInput placeholder="Extension" [(ngModel)]="data.ext" name="ext" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput placeholder="Celular" [(ngModel)]="data.celular" name="celular" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+          <mat-label>Estatus</mat-label>
+          <mat-select name="lideres" [(ngModel)]="data.activo" required>
+            <mat-option [value]="true">Activo</mat-option>
+            <mat-option [value]="false">Inactivo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+      (click)="confirm()">Guardar</button>
+  </div>
+</form>

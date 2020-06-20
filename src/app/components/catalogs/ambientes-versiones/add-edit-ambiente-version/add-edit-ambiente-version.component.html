@@ -1,0 +1,40 @@
+<h3 mat-dialog-title> {{ data.idAmbienteVersion !== undefined ? 'Editar' : 'Agregar' }} elemento</h3>
+<form (ngSubmit)="submit" #formControl="ngForm">
+  <mat-dialog-content>
+    <div fxLayout="column">
+        <mat-form-field color="accent" appearance="outline">
+            <mat-label>Ambiente</mat-label>
+            <mat-select name="ambiente" [(ngModel)]="data.ambiente.idAmbiente" required>
+              <mat-option *ngFor="let opt of ambientes" [value]="opt.idAmbiente">
+                {{opt.ruta}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+              <mat-label>Versión</mat-label>
+              <mat-select name="version" [(ngModel)]="data.version.idVersion" required>
+                <mat-option *ngFor="let opt of versiones" [value]="opt.idVersion">
+                  {{opt.version}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Desde</mat-label>
+        <input matInput placeholder="desde" [(ngModel)]="data.desde" name="desde" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Hasta</mat-label>
+        <input matInput placeholder="hasta" [(ngModel)]="data.hasta" name="hasta" maxlength="30" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+      (click)="confirm()">Guardar</button>
+  </div>
+</form>

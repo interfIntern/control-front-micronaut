@@ -1,0 +1,43 @@
+<h3 mat-dialog-title> {{ data.idServer !== undefined ? 'Editar' : 'Agregar' }} elemento</h3>
+<form (ngSubmit)="submit" #formControl="ngForm">
+  <mat-dialog-content>
+    <div fxLayout="column">
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Procesador</mat-label>
+        <input matInput placeholder="Procesador" [(ngModel)]="data.procesador" name="procesador" maxlength="30"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Volumen de disco</mat-label>
+        <input matInput type="number" placeholder="Volumen de disco" [(ngModel)]="data.volumenDisco" name="volumen" maxlength="10"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>RAM</mat-label>
+        <input matInput type="number" placeholder="RAM" [(ngModel)]="data.ram" name="ram" maxlength="5"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Sistema Operativo</mat-label>
+        <input matInput placeholder="Sistema operativo" [(ngModel)]="data.so" name="so" maxlength="30"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>IP</mat-label>
+        <input matInput placeholder="IP" [(ngModel)]="data.ip" name="ip" maxlength="30"
+          required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+      (click)="confirm()">Guardar</button>
+  </div>
+</form>

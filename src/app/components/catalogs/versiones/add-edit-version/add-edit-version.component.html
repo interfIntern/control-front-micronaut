@@ -1,0 +1,51 @@
+<h3 mat-dialog-title> {{ data.idVersion !== undefined ? 'Editar' : 'Agregar' }} elemento</h3>
+<form (ngSubmit)="submit" #formControl="ngForm">
+  <mat-dialog-content>
+    <div fxLayout="column">
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Versión</mat-label>
+        <input matInput placeholder="Versión" [(ngModel)]="data.version" name="version" maxlength="50" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <!--Textarea-->
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput placeholder="descripcion" [(ngModel)]="data.descripcion" name="descripcion"
+          required maxlength="2000"></textarea>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Resumen</mat-label>
+        <textarea matInput placeholder="resumen" [(ngModel)]="data.resumen" name="resumen"
+          required></textarea>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Aplicativo</mat-label>
+        <mat-select name="aplicativo" [(ngModel)]="data.aplicativo.idAplicativo" required>
+          <mat-option *ngFor="let opt of aplicativos" [value]="opt.idAplicativo">
+            {{opt.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Folio</mat-label>
+        <mat-select name="folios" [(ngModel)]="data.folio.idFolio" required>
+          <mat-option *ngFor="let opt of folios" [value]="opt.idFolio">
+            {{opt.folioCq}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+      (click)="confirm()">Guardar</button>
+  </div>
+</form>

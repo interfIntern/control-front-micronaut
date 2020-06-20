@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewEncapsulation } from '@angular/compiler/src/compiler_facade_interface';
 
 @Component({
   selector: 'app-root',
