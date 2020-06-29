@@ -49,7 +49,8 @@ export class MenuPrincipalComponent implements AfterViewInit {
           displayName: 'Ambientes',
           iconName: 'group',
           route: 'catalogs/ambientes'
-        },{
+        },
+        {
           displayName: 'Versiones',
           iconName: 'group',
           route: 'catalogs/versiones'

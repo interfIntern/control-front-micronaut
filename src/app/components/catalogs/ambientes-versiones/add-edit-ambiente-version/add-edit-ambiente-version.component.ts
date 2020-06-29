@@ -7,11 +7,17 @@ import { AmbientesService } from 'src/app/services/ambientes.service';
 import { VersionesService } from 'src/app/services/versiones.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/format.datepicker';
 
 @Component({
   selector: 'app-add-edit-ambiente-version',
   templateUrl: './add-edit-ambiente-version.component.html',
-  styleUrls: ['./add-edit-ambiente-version.component.css']
+  styleUrls: ['./add-edit-ambiente-version.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class AddEditAmbienteVersionComponent implements OnInit {
 
@@ -32,10 +38,20 @@ export class AddEditAmbienteVersionComponent implements OnInit {
     if (this.dataInitial.idAmbienteVersion !== null && this.dataInitial.idAmbienteVersion !== undefined) {
       this.isEdit = true;
       this.data = Object.assign({}, this.dataInitial);
+      this.data.desde = new Date(this.data.desde);
+      this.data.hasta = new Date(this.data.hasta);
     }
     this.getAmbientes();
     this.getVersiones();
 
+  }
+
+  getDateFormat(fecha: any): Date {
+    if(fecha) {
+      let parseDate = new Date(fecha);
+      return new Date(parseDate.getFullYear(), parseDate.getMonth(), parseDate.getDate() +1);
+    }
+    return null;
   }
 
   getAmbientes(): void {

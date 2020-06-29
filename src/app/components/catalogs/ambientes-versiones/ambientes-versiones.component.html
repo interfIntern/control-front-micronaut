@@ -25,12 +25,12 @@
   
         <ng-container matColumnDef="desde">
           <th mat-header-cell *matHeaderCellDef> Desde </th>
-          <td mat-cell *matCellDef="let element"> {{element.desde}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.desde | date: 'yyyy/MM/dd'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="hasta">
           <th mat-header-cell *matHeaderCellDef> Hasta </th>
-          <td mat-cell *matCellDef="let element"> {{element.hasta}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.hasta | date: 'yyyy/MM/dd'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="actions">
@@ -45,7 +45,7 @@
               <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
   
-            <button mat-icon-button color="accent" (click)="deleteItem(row.idAmbiente)" matTooltip="Eliminar">
+            <button mat-icon-button color="accent" (click)="deleteItem(row.idAmbienteVersion)" matTooltip="Eliminar">
               <mat-icon aria-label="Delete">delete</mat-icon>
             </button>
           </td>

@@ -6,12 +6,18 @@ import { DeleteComponent } from '../../share/dialogs/delete/delete.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/format.datepicker';
 
 @Component({
   selector: 'app-ambientes-versiones',
   templateUrl: './ambientes-versiones.component.html',
   styleUrls: ['../../../app.component.scss','./ambientes-versiones.component.scss'],
-  providers: [AmbientesVersionesService]
+  providers: [
+    AmbientesVersionesService,
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class AmbientesVersionesComponent implements OnInit {
 
@@ -30,7 +36,9 @@ export class AmbientesVersionesComponent implements OnInit {
 
   getAll(): void {
     this.apiService.getAll()
-      .subscribe(results => (this.rows.data = results));
+      .subscribe(results => {
+        this.rows.data = results;
+      });
   }
 
   addNew() {
